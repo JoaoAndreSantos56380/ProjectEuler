@@ -22,10 +22,10 @@ public class LargestProductInAGrid {
 						{20,69,36,41,72,30,23,88,34,62,99,69,82,67,59,85,74,04,36,16},
 						{20,73,35,29,78,31,90,01,74,31,49,71,48,86,81,16,23,57,5,54},
 						{1,70,54,71,83,51,54,69,16,92,33,48,61,43,52,1,89,19,67,48}};
-						System.out.println("linhas");
-						System.out.println(prodLinha(grid, oldMult, newMult));
-						System.out.println("colunas");
-				System.out.println(prodCol(grid, oldMult, newMult));
+		System.out.println("linhas");
+		System.out.println(prodLinha(grid, oldMult, newMult));
+		System.out.println("colunas");
+		System.out.println(prodCol(grid, oldMult, newMult));
 	}
 
 	public static int prodLinha(int[][] grid, int oldMult, int newMult){
@@ -66,21 +66,21 @@ public class LargestProductInAGrid {
 	}
 
 	public static int proddiagprincipal(int[][] grid, int oldMult, int newMult){
-				//percorrer as coluna a coluna
-				for (int i = 0; i < grid[0].length; i++) {
-					// comecar numa linha e ir avancanco
-					for (int j = 0; j < grid.length; j+=4) {
-						oldMult = 1;
-						System.out.print(grid[j][i] + " ");
-						//por cada avanco eu peco tres colunas a frente 
-						for (int j2 = j + 1; j2 < j + 4 && j2 < grid.length; j2++) {
-							System.out.print(grid[j2][i] + " ");
-							oldMult *= grid[j2][i];
-						}
-						System.out.println();
-						//System.out.println(oldMult);
-					}
+		//percorrer as coluna a coluna
+		for (int i = 0; i < grid[0].length; i++) {
+			// comecar numa linha e ir avancanco
+			for (int j = 0; j < grid.length; j+=4) {
+				oldMult = 1;
+				System.out.print(grid[j][i] + " ");
+				//por cada avanco eu peco tres colunas a frente 
+				for (int j2 = j + 1; j2 < j + 4 && j2 < grid.length; j2++) {
+					System.out.print(grid[j2][i] + " ");
+					oldMult *= grid[j2][i];
 				}
-				return oldMult;
+				System.out.println();
+				//System.out.println(oldMult);
+			}
+		}
+		return oldMult;
 	}
 }

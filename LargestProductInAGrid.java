@@ -65,7 +65,7 @@ public class LargestProductInAGrid {
 		return oldMult;
 	}
 
-	public static int proddiagprincipal(){
+	public static int proddiagprincipal(int[][] grid, int oldMult, int newMult){
 				//percorrer as coluna a coluna
 				for (int i = 0; i < grid[0].length; i++) {
 					// comecar numa linha e ir avancanco

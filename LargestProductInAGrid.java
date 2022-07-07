@@ -23,90 +23,120 @@ public class LargestProductInAGrid {
 						{20,73,35,29,78,31,90,01,74,31,49,71,48,86,81,16,23,57, 5,54},
 						{ 1,70,54,71,83,51,54,69,16,92,33,48,61,43,52, 1,89,19,67,48}};
 		System.out.println("linhas");
-		System.out.println(prodLinha(grid, oldMult, newMult));
+		System.out.println("numero : " + prodLinha(grid));
 		System.out.println("colunas");
-		System.out.println(prodCol(grid, oldMult, newMult));
+		System.out.println("numero : " + prodCol(grid));
 		System.out.println("diagonais principais");
-		System.out.println(prodDiagPrincipal(grid, oldMult, newMult));
+		System.out.println("numero : " + prodDiagPrincipal(grid));
 		System.out.println("diagonais secundarias");
-		System.out.println(prodDiagSecundaria(grid, oldMult, newMult));
-	}
+		System.out.println("numero : " + prodDiagSecundaria(grid));
+		int finalNum = 0;
+		if (prodLinha(grid) > prodCol(grid)) {
+			finalNum = prodLinha(grid);
+		} else {
+			finalNum = prodCol(grid); 
+		}
 
-	public static int prodLinha(int[][] grid, int oldMult, int newMult){
+		if (prodDiagPrincipal(grid) > finalNum) {
+			finalNum = prodDiagPrincipal(grid);
+		}
+
+		if (prodDiagSecundaria(grid) > finalNum) {
+			finalNum = prodDiagSecundaria(grid);
+		}
+		System.out.println(finalNum);
+	}//main
+
+	public static int prodLinha(int[][] grid){
+		int currentMult = 1;
+		int finalMult = 1;
 		//percorrer as linha a linha
 		for (int i = 0; i < grid.length; i++) {
 			// comecar numa coluna e ir avancanco
-			for (int j = 0; j < grid[0].length; j+=4) {
-				oldMult = 1;
-				System.out.print(grid[i][j] + " ");
-				//por cada avanco eu peco tres colunas a frente 
+			for (int j = 0; j < grid[0].length; j++) {
+				//System.out.print(grid[i][j] + " ");
+				//por cada avanco eu peco tres colunas a frente
+				currentMult = 1; 
 				for (int j2 = j + 1; j2 < j + 4 && j2 < grid.length; j2++) {
-					System.out.print(grid[i][j2] + " ");
-					oldMult *= grid[i][j2];
+					//System.out.print(grid[i][j2] + " ");
+					currentMult *= grid[i][j2];
 				}
-				System.out.println(oldMult);
+				if (currentMult > finalMult) {
+					finalMult = currentMult;
+				}
+				//System.out.println();
 			}
 		}
-		return oldMult;
+		return finalMult;
 	}
 
-	public static int prodCol(int[][] grid, int oldMult, int newMult){
+	public static int prodCol(int[][] grid){
+		int currentMult = 1;
+		int finalMult = 1;
 		//percorrer as coluna a coluna
 		for (int i = 0; i < grid[0].length; i++) {
 			// comecar numa linha e ir avancanco
-			for (int j = 0; j < grid.length; j+=4) {
-				oldMult = 1;
-				System.out.print(grid[j][i] + " ");
+			for (int j = 0; j < grid.length; j++) {
+				currentMult = 1;
+				//System.out.print(grid[j][i] + " ");
 				//por cada avanco eu peco tres colunas a frente 
 				for (int j2 = j + 1; j2 < j + 4 && j2 < grid.length; j2++) {
-					System.out.print(grid[j2][i] + " ");
-					oldMult *= grid[j2][i];
+					//System.out.print(grid[j2][i] + " ");
+					currentMult *= grid[j2][i];
 				}
-				System.out.println();
-				//System.out.println(oldMult);
+				if (currentMult > finalMult) {
+					finalMult = currentMult;
+				}
+				//System.out.println();
 			}
 		}
-		return oldMult;
+		return finalMult;
 	}
 
-	public static int prodDiagPrincipal(int[][] grid, int oldMult, int newMult){
-		int num = 1;
+	public static int prodDiagPrincipal(int[][] grid){
+		int currentMult = 1;
+		int finalMult = 1;
 		for (int linha = 0; linha < grid.length; linha++) {
 			for (int coluna = 0; coluna < grid[0].length; coluna++) {
-				num = 1;
+				currentMult = 1;
 				//System.out.print(grid[linha][coluna] + " ");
 				int diagLinha = linha;
 				int diagColuna = coluna;
 				while (diagLinha < linha + 4 && diagColuna < coluna + 4 && diagLinha < grid.length && diagColuna < grid[0].length) {
-					System.out.print(grid[diagLinha][diagColuna] + " ");
-					num *= grid[diagLinha][diagColuna];
+					//System.out.print(grid[diagLinha][diagColuna] + " ");
+					currentMult *= grid[diagLinha][diagColuna];
 					diagLinha++;
 					diagColuna++;
 				}
-				System.out.print("num: " + num);
-				System.out.println();
+				if (currentMult > finalMult) {
+					finalMult = currentMult;
+				}
+				//System.out.println();
 			}
 		}
-		return num;
+		return finalMult;
 	}
 
-	public static int prodDiagSecundaria(int[][] grid, int oldMult, int newMult){
-		int num = 1;
+	public static int prodDiagSecundaria(int[][] grid){
+		int currentMult = 1;
+		int finalMult = 1;
 		for (int linha = 0; linha < grid.length; linha++) {
 			for (int coluna = 0; coluna < grid[0].length; coluna++) {
-				num = 1;
+				currentMult = 1;
 				int diagLinha = linha;
 				int diagColuna = coluna;
 				while (diagLinha < linha + 4 && diagColuna > coluna - 4 && diagLinha < grid.length && diagColuna >= 0) {
-					System.out.print(grid[diagLinha][diagColuna] + " ");
-					num *= grid[diagLinha][diagColuna];
+					//System.out.print(grid[diagLinha][diagColuna] + " ");
+					currentMult *= grid[diagLinha][diagColuna];
 					diagLinha++;
 					diagColuna--;
 				}
-				System.out.print("num: " + num);
-				System.out.println();
+				if (currentMult > finalMult) {
+					finalMult = currentMult;
+				}
+				//System.out.println();
 			}
 		}
-		return num;
+		return finalMult;
 	}
-}
+}//classe

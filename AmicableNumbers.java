@@ -5,12 +5,14 @@ public class AmicableNumbers {
 		boolean[] primos = crivoEratostenes(10000);
 		int totalSum = 0;
 		ArrayList<Integer> listaNumsContabilizados = new ArrayList<>(); 
-		for (int i = 0; i <= 10000; i++) {
-			if ( (calculaSomaProperDivisors(i, primos) == calculaSomaProperDivisors(calculaSomaProperDivisors(i, primos), primos)) && (calculaSomaProperDivisors(calculaSomaProperDivisors(i, primos), primos) == i) ) {
-				if (contemAmicableNumber(i, listaNumsContabilizados) != -1 && contemAmicableNumber(i, listaNumsContabilizados)!= -1) {
-					totalSum += (i + calculaSomaProperDivisors(i, primos));
+		for (int i = 2; i < 10000; i++) {
+			int d_b = calculaSomaProperDivisors(i, primos);
+			int d_a = calculaSomaProperDivisors(d_b, primos);
+			if ( i == d_a && (d_a != d_b)) {
+				if (contemAmicableNumber(d_a, listaNumsContabilizados) == -1 || contemAmicableNumber(d_b, listaNumsContabilizados)== -1) {
 					listaNumsContabilizados.add(i);
 					listaNumsContabilizados.add(calculaSomaProperDivisors(i, primos));
+					totalSum += (d_a + d_b);
 				}
 			}
 		}
@@ -51,6 +53,7 @@ public class AmicableNumbers {
 	}
 
 	private static int calculaSomaProperDivisors(int num, boolean[] primos) {
+		int numero = num;
 		// obter primos ate ao numero desejado9 (numero triangular)
 		//boolean[] primos = crivoEratostenes(sum);
 		// array de fatores primos do numero triangular
@@ -78,7 +81,7 @@ public class AmicableNumbers {
 				}
 			}
 		}
-
+		int somaFinal = 1;
 		int somaDivisores = 0;
 		//int expoente = 0;
 		//obter expoentes e fazer calculo respetivo (multiplicar os expoentes uns pelos outros)
@@ -87,8 +90,10 @@ public class AmicableNumbers {
 			for (int j = 0; j <= fatoresPrimos.get(i).getExpoente(); j++) {
 				somaDivisores += Math.pow((double)fatoresPrimos.get(i).getBase(), j);
 			}
+			somaFinal *= somaDivisores;
+			somaDivisores = 0;
 		}
 		//devolver o numero de divisores
-		return somaDivisores;
+		return somaFinal - numero;
 	}
 }

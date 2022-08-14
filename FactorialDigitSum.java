@@ -13,5 +13,6 @@ public class FactorialDigitSum {
 			sum += (numeroStr.charAt(i) - 48); 
 		}
 		System.out.println(sum);
+		prod.abs();
 	}
 }

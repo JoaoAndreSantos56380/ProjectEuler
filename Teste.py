@@ -1,1 +1,1 @@
-print("CU")
+print("CUONA")
